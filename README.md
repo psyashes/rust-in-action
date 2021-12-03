@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <img width=50% height=50% src="https://images.manning.com/book/4/d33e139-a73e-4206-b457-6fa024449e33/McNamara-Rust-HI.png"></p>
+  <img width=30% height=30% src="https://images.manning.com/book/4/d33e139-a73e-4206-b457-6fa024449e33/McNamara-Rust-HI.png"></p>
 </h1>
 
 # :writing_hand: rust-in-action
