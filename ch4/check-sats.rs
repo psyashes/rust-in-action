@@ -1,6 +1,7 @@
 #[derive(Debug)]
 struct CubeSat {
     id: u64,
+    mailbox: Mailbox,
 }
 
 #[derive(Debug)]
@@ -8,23 +9,29 @@ enum StatusMessage {
     Ok,
 }
 
-fn check_status(set_id: CubeSat) -> StatusMessage {
-    StatusMessage::Ok
+struct Mailbox {
+    messages: Vec<Messages>,
+}
+
+type Message = String;
+
+fn check_status(sat_id: CubeSat) -> CubeSat {
+    println!("{:?}: {:?}", sat_id, StatusMessage::Ok);
+    sat_id
 }
 
 fn main() {
-    let set_a = CubeSat { id: 0 };
-    let set_b = CubeSat { id: 1 };
-    let set_c = CubeSat { id: 2 };
+    let sat_a = CubeSat { id: 0 };
+    let sat_b = CubeSat { id: 1 };
+    let sat_c = CubeSat { id: 2 };
 
-    let a_status = check_status(set_a);
-    let b_status = check_status(set_b);
-    let c_status = check_status(set_c);
-    println!("a: {:?}, b: {:?}, c: {:?}", a_status, b_status, c_status);
+    let sat_a = check_status(sat_a);
+    let sat_b = check_status(sat_b);
+    let sat_c = check_status(sat_c);
 
     // "waiting" ...
-    let a_status = check_status(set_a);
-    let b_status = check_status(set_b);
-    let c_status = check_status(set_c);
-    println!("a: {:?}, b: {:?}, c: {:?}", a_status, b_status, c_status);
+
+    let sat_a = check_status(sat_a);
+    let sat_b = check_status(sat_b);
+    let sat_c = check_status(sat_c);
 }
