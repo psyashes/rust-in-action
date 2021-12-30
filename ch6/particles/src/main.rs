@@ -115,4 +115,17 @@ fn main() {
 
     let mut world = World::new(width, height);
     world.add_shapes(1000);
+
+    while let Some(event) = window.next() {
+        world.update();
+
+        window.draw_2d(&event, |ctx, renderer, _device| {
+            clear([0.15, 0.17, 0.17, 0.9], renderer);
+
+            for s in &mut world.particles {
+                let size = [s.position[0], s.position[1], s.width, s.height];
+                rectangle(s.color, size, ctx.transform, renderer);
+            }
+        });
+    }
 }
