@@ -60,6 +60,22 @@ impl World {
             self.particles.push(boxed_particle);
         }
     }
+
+    fn update(&mut self) {
+        let n = self.rng.gen_range(-3..=3);
+
+        if n > 0 {
+            self.add_shapes(n);
+        } else {
+            self.remove_shapes(n);
+        }
+
+        self.particles.shrink_to_fit();
+        for shape in &mut self.particles {
+            shape.update();
+        }
+        self.current_turn += 1;
+    }
 }
 
 fn main() {
@@ -70,4 +86,5 @@ fn main() {
         .expect("Could not create a window.");
 
     let mut world = World::new(width, height);
+    world.add_shapes(1000);
 }
