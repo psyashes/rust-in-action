@@ -40,6 +40,13 @@ impl Particle {
             color: [1.0, 1.0, 1.0, 0.99],
         }
     }
+
+    fn update(&mut self) {
+        self.velocity = add(self.velocity, self.acceleration);
+        self.position = add(self.position, self.velocity);
+        self.acceleration = mul_scalar(self.acceleration, 0.7);
+        self.color[3] *= 0.995;
+    }
 }
 
 impl World {
@@ -58,6 +65,27 @@ impl World {
             let particle = Particle::new(&self);
             let boxed_particle = Box::new(particle);
             self.particles.push(boxed_particle);
+        }
+    }
+
+    fn remove_shapes(&mut self, n: i32) {
+        for _ in 0..n.abs() {
+            let mut to_delete = None;
+
+            let particle_iter = self.particles.iter().enumerate();
+
+            for (i, particle) in particle_iter {
+                if particle.color[3] < 0.02 {
+                    to_delete = Some(i);
+                }
+                break;
+            }
+
+            if let Some(i) = to_delete {
+                self.particles.remove(i);
+            } else {
+                self.particles.remove(0);
+            }
         }
     }
 
