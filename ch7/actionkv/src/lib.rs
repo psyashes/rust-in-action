@@ -23,3 +23,16 @@ pub struct ActionKV {
     f: File,
     pub index: HashMap<ByteString, u64>,
 }
+
+impl ActionKV {
+    pub fn open(path: &Path) -> io::Result<Self> {
+        let f = OpenOptions::new()
+            .read(true)
+            .write(true)
+            .create(true)
+            .append(true)
+            .open(path)?;
+        let index = HashMap::new();
+        Ok(ActionKV { f, index })
+    }
+}
